@@ -3,7 +3,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Grocery Table View Controller-->
@@ -23,7 +22,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="pDR-ww-pTd" kind="presentation" id="TUh-E0-XYo"/>
+                                    <segue destination="i6Y-qR-drf" kind="show" identifier="GroceryItemsSegue" id="dT3-F3-soE"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -34,15 +33,16 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="5JQ-4n-UFm">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="2lp-yW-5lG">
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
-                                <segue destination="BYZ-38-t0r" kind="presentation" id="YgC-qk-uDi"/>
+                                <action selector="addButtonPressed" destination="Czu-Bf-eYj" id="6xE-7a-mhV"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yEy-Ef-pol" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="196" y="317"/>
+            <point key="canvasLocation" x="292" y="326"/>
         </scene>
         <!--Grocery Items Table View Controller-->
         <scene sceneID="qil-DT-voq">
@@ -53,7 +53,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="Qvk-K9-yFq">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cells" id="Qvk-K9-yFq">
                                 <rect key="frame" x="0.0" y="92" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Qvk-K9-yFq" id="klN-q2-vRe">
@@ -67,62 +67,18 @@
                             <outlet property="delegate" destination="i6Y-qR-drf" id="JEG-s4-Z7k"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="Ay2-eE-n5v"/>
+                    <navigationItem key="navigationItem" id="Ay2-eE-n5v">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="h5F-Z3-cui">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="addButtonPressed" destination="i6Y-qR-drf" id="MGe-dP-AYP"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TZO-zs-UqN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1818" y="326"/>
-        </scene>
-        <!--Grocery Cate Adder View Controller-->
-        <scene sceneID="tne-QT-ifu">
-            <objects>
-                <viewController id="BYZ-38-t0r" customClass="GroceryCateAdderViewController" customModule="GroceryAppCoreData" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
-                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RoY-5n-5Eg">
-                                <rect key="frame" x="117" y="139" width="366" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tn6-ku-i2R">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="54"/>
-                                <items>
-                                    <navigationItem title="Add Category Title" id="rcH-F8-R4Q">
-                                        <barButtonItem key="rightBarButtonItem" title="Save" id="B6i-0t-jUY">
-                                            <connections>
-                                                <action selector="addButton:" destination="BYZ-38-t0r" id="KGZ-Pe-RTZ"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
-                        </subviews>
-                        <color key="backgroundColor" red="0.52342235580039675" green="0.68571291483283803" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                        <constraints>
-                            <constraint firstItem="Tn6-ku-i2R" firstAttribute="centerX" secondItem="RoY-5n-5Eg" secondAttribute="centerX" id="0Xi-r3-I8p"/>
-                            <constraint firstItem="RoY-5n-5Eg" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="KiJ-pI-GMX"/>
-                            <constraint firstItem="RoY-5n-5Eg" firstAttribute="top" secondItem="Tn6-ku-i2R" secondAttribute="bottom" constant="85" id="WfC-xV-r3u"/>
-                            <constraint firstItem="Tn6-ku-i2R" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="cSL-bC-B8g"/>
-                            <constraint firstItem="RoY-5n-5Eg" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="97" id="qdP-3E-MUP"/>
-                            <constraint firstItem="RoY-5n-5Eg" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="119" id="why-F8-8TM"/>
-                            <constraint firstItem="Tn6-ku-i2R" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="xP5-PE-TVk"/>
-                        </constraints>
-                    </view>
-                    <toolbarItems/>
-                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
-                    <connections>
-                        <outlet property="categoryNameField" destination="RoY-5n-5Eg" id="bYy-Hi-T03"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="667" y="-437"/>
+            <point key="canvasLocation" x="1165" y="326"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="d58-bx-aVG">
@@ -141,24 +97,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="I44-BY-Tiy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-616" y="317"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="SDY-to-e5g">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="pDR-ww-pTd" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Xzq-UL-7KQ">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="i6Y-qR-drf" kind="relationship" relationship="rootViewController" id="IN9-Xj-chO"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="2fY-eg-LI2" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1006" y="326"/>
         </scene>
     </scenes>
 </document>

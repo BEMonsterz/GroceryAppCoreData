@@ -20,6 +20,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        
+        
+        
         let coreDataManager = CoreDataManager()
         self.managedContextOfObjects = coreDataManager.managedContextOfObjects
         
@@ -31,8 +34,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             fatalError("Controller not found")
         }
         
-        groceryTableViewController.managedContextOfObjects = self.managedContextOfObjects
+//        guard let itemsTableViewController = navigationController.viewControllers.first as? GroceryItemsTableViewController else {
+//            fatalError("Controller not found")
+//        }
+
         
+        groceryTableViewController.managedContextOfObjects = self.managedContextOfObjects
+//        itemsTableViewController.managedContextOfObjects = self.managedContextOfObjects
+
         
         return true
     }

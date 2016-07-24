@@ -14,7 +14,6 @@
 		33EEECEF1D440981005E1789 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 33EEECED1D440981005E1789 /* LaunchScreen.storyboard */; };
 		33EEECF81D4409BF005E1789 /* GroceryAppModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 33EEECF61D4409BF005E1789 /* GroceryAppModel.xcdatamodeld */; };
 		33EEECFE1D440DF9005E1789 /* GroceryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33EEECFD1D440DF9005E1789 /* GroceryTableViewController.swift */; };
-		33EEED001D440F55005E1789 /* GroceryCateAdderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33EEECFF1D440F55005E1789 /* GroceryCateAdderViewController.swift */; };
 		33EEED031D44163B005E1789 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33EEED021D44163B005E1789 /* CoreDataManager.swift */; };
 		33EEED051D441A0C005E1789 /* GroceryItemsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33EEED041D441A0C005E1789 /* GroceryItemsTableViewController.swift */; };
 /* End PBXBuildFile section */
@@ -30,7 +29,6 @@
 		33EEECF71D4409BF005E1789 /* GroceryAppModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GroceryAppModel.xcdatamodel; sourceTree = "<group>"; };
 		33EEECF91D440B94005E1789 /* GroceryAppModel 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "GroceryAppModel 2.xcdatamodel"; sourceTree = "<group>"; };
 		33EEECFD1D440DF9005E1789 /* GroceryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroceryTableViewController.swift; sourceTree = "<group>"; };
-		33EEECFF1D440F55005E1789 /* GroceryCateAdderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroceryCateAdderViewController.swift; sourceTree = "<group>"; };
 		33EEED011D4411BC005E1789 /* GroceryAppModel 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "GroceryAppModel 3.xcdatamodel"; sourceTree = "<group>"; };
 		33EEED021D44163B005E1789 /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		33EEED041D441A0C005E1789 /* GroceryItemsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroceryItemsTableViewController.swift; sourceTree = "<group>"; };
@@ -74,7 +72,6 @@
 				33EEECF01D440981005E1789 /* Info.plist */,
 				33EEECF61D4409BF005E1789 /* GroceryAppModel.xcdatamodeld */,
 				33EEECFD1D440DF9005E1789 /* GroceryTableViewController.swift */,
-				33EEECFF1D440F55005E1789 /* GroceryCateAdderViewController.swift */,
 				33EEED021D44163B005E1789 /* CoreDataManager.swift */,
 				33EEED041D441A0C005E1789 /* GroceryItemsTableViewController.swift */,
 			);
@@ -154,7 +151,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				33EEED031D44163B005E1789 /* CoreDataManager.swift in Sources */,
-				33EEED001D440F55005E1789 /* GroceryCateAdderViewController.swift in Sources */,
 				33EEED051D441A0C005E1789 /* GroceryItemsTableViewController.swift in Sources */,
 				33EEECE71D440981005E1789 /* ViewController.swift in Sources */,
 				33EEECF81D4409BF005E1789 /* GroceryAppModel.xcdatamodeld in Sources */,

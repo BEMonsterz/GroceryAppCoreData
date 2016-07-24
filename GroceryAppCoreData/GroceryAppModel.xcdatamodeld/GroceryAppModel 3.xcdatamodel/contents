@@ -2,7 +2,7 @@
 <model userDefinedModelVersionIdentifier="GroceryAppModel 3" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10174" systemVersion="15F34" minimumToolsVersion="Xcode 7.0">
     <entity name="GroceryCategory" representedClassName=".GroceryCategory" syncable="YES">
         <attribute name="grocerytitle" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="groceryItems" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="GroceryItems" inverseName="groceryCategory" inverseEntity="GroceryItems" syncable="YES"/>
+        <relationship name="groceryItems" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="GroceryItems" inverseName="groceryCategory" inverseEntity="GroceryItems" syncable="YES"/>
     </entity>
     <entity name="GroceryItems" syncable="YES">
         <attribute name="groceryItems" optional="YES" attributeType="String" syncable="YES"/>

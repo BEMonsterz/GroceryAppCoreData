@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class GroceryTableViewController: UITableViewController,NSFetchedResultsControllerDelegate,GroceryCateTitle {
+class GroceryTableViewController: UITableViewController,NSFetchedResultsControllerDelegate {
     
     var managedContextOfObjects :NSManagedObjectContext!
     
@@ -17,6 +17,9 @@ class GroceryTableViewController: UITableViewController,NSFetchedResultsControll
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        self.navigationController?.navigationBar.barTintColor = UIColor(red: 52/255, green: 152/255, blue: 219/255, alpha: 1.0)
         
         let fetchRequest = NSFetchRequest(entityName: "GroceryCategory")
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "grocerytitle", ascending: true)]
@@ -26,10 +29,28 @@ class GroceryTableViewController: UITableViewController,NSFetchedResultsControll
         self.fetchedResultsController.delegate = self
         
         try! self.fetchedResultsController.performFetch()
-        
-        
-        
     }
+
+    @IBAction func addButtonPressed(){
+        let alert = UIAlertController(title: "Add Grocery Category", message: nil, preferredStyle: .Alert)
+        alert.addTextFieldWithConfigurationHandler({ (textField) -> Void in
+        })
+        
+        alert.addAction(UIAlertAction(title: "Add Category", style: .Default, handler: { (action) -> Void in
+            let textField = alert.textFields![0] as UITextField
+            print(textField.text!)
+            
+            let groceryCategory = NSEntityDescription.insertNewObjectForEntityForName("GroceryCategory", inManagedObjectContext: self.managedContextOfObjects)
+            
+            groceryCategory.setValue(textField.text, forKey: "grocerytitle")
+            
+            try! self.managedContextOfObjects.save()
+
+        }))
+        self.presentViewController(alert, animated: true, completion: nil)
+
+    }
+    
     
     
     
@@ -56,10 +77,23 @@ class GroceryTableViewController: UITableViewController,NSFetchedResultsControll
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
-        let addDiaryController = segue.destinationViewController as? GroceryCateAdderViewController
-        addDiaryController!.delegate = self
+        guard let indexPath = self.tableView.indexPathForSelectedRow else {
+            fatalError("Invalid IndexPath")
+        }
+        
+        let groceryCategory = self.fetchedResultsController.objectAtIndexPath(indexPath) as! NSManagedObject
+        
+        
+        guard let groceryItemsTableViewController = segue.destinationViewController as? GroceryItemsTableViewController else {
+            fatalError("Destination controller not found")
+        }
+        
+        groceryItemsTableViewController.groceryCategory = groceryCategory
+        groceryItemsTableViewController.managedContextOfObjects = self.managedContextOfObjects
         
     }
+    
+    
     
     
     func newTitleWasCreated(title :String!){

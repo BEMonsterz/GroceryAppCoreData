@@ -16,7 +16,7 @@ class CoreDataManager: NSObject {
     override init() {
         
         guard let url = NSBundle.mainBundle().URLForResource("GroceryAppModel", withExtension: "momd") else {
-            fatalError("DiaryApp not found")
+            fatalError("GroceryApp not found")
         }
         
         guard let managedObjectModel = NSManagedObjectModel(contentsOfURL: url) else {

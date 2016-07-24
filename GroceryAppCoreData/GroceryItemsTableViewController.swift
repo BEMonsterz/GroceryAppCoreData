@@ -7,89 +7,157 @@
 //
 
 import UIKit
+import CoreData
 
-class GroceryItemsTableViewController: UITableViewController {
+class GroceryItemsTableViewController: UITableViewController,NSFetchedResultsControllerDelegate {
 
+    var managedContextOfObjects :NSManagedObjectContext!
+    var groceryCategory :NSManagedObject!
+
+    var fetchedResultsController :NSFetchedResultsController!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.navigationBar.barTintColor = UIColor(red: 52/255, green: 152/255, blue: 219/255, alpha: 1.0)
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
+        
+        self.title = groceryCategory.valueForKey("grocerytitle") as? String
+        
+        let fetchRequest = NSFetchRequest(entityName: "GroceryItems")
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "groceryItems", ascending: true)]
+        
+        let sorting = NSPredicate(format: "groceryCategory.grocerytitle = %@", self.title!)
+        fetchRequest.predicate = sorting
+        
+        
+        
+        self.fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedContextOfObjects, sectionNameKeyPath: nil, cacheName: nil)
+        
+        self.fetchedResultsController.delegate = self
+        
+        try! self.fetchedResultsController.performFetch()
+        
+        
 
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        
+        
     }
-
+    
+    
+    
+    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
+        
+        switch(type) {
+            
+        case .Insert:
+            self.tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Automatic)
+            break
+            
+        case .Delete:
+            self.tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Automatic)
+            break
+            
+        case .Update:
+            break
+            
+        case .Move:
+            break
+            
+        }
+    }
+    
+    func newItemWasCreated(groceryItems :String!){
+    
+        let groceryList = NSEntityDescription.insertNewObjectForEntityForName("GroceryCategory", inManagedObjectContext: self.managedContextOfObjects)
+        
+        groceryList.setValue(title, forKey: "groceryItems")
+        
+        try! self.managedContextOfObjects.save()
+        
+    }
+    
+    
+    
+    @IBAction func addButtonPressed(){
+        let alert = UIAlertController(title: "Add Grocery Item", message: nil, preferredStyle: .Alert)
+        alert.addTextFieldWithConfigurationHandler({ (textField) -> Void in
+        })
+        
+        alert.addAction(UIAlertAction(title: "Add Item", style: .Default, handler: { (action) -> Void in
+            let textField = alert.textFields![0] as UITextField
+            print(textField.text!)
+            
+            let groceryItem = NSEntityDescription.insertNewObjectForEntityForName("GroceryItems", inManagedObjectContext: self.managedContextOfObjects)
+            groceryItem.setValue(textField.text, forKey: "groceryItems")
+            
+            
+            let groceryItems = self.groceryCategory.mutableSetValueForKey("groceryItems")
+            
+            groceryItems.addObject(groceryItem)
+            
+            
+            try! self.managedContextOfObjects.save()
+            
+        }))
+        
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
     // MARK: - Table view data source
-
+    
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
-
+    
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+        
+        guard let sections = self.fetchedResultsController.sections else {
+            fatalError("Featched Results Error")
+        }
+        
+        return sections[section].numberOfObjects
     }
-
-    /*
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
-
+        
+        let cell = tableView.dequeueReusableCellWithIdentifier("Cells", forIndexPath: indexPath)
+        
+        let groceryList = self.fetchedResultsController.objectAtIndexPath(indexPath)
+        
+        
+        
+        cell.textLabel?.text = groceryList.valueForKey("groceryItems") as? String
+        print()
         // Configure the cell...
-
+        print()
         return cell
     }
-    */
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
+    
+    
+    
+    
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+        
+        
+        if editingStyle == UITableViewCellEditingStyle.Delete {
+            
+            let entryData: NSManagedObject = self.fetchedResultsController.objectAtIndexPath(indexPath) as! NSManagedObject
+            
+            self.managedContextOfObjects.deleteObject(entryData)
+            
+            try! self.managedContextOfObjects.save()
+        }
     }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
+    
+    
+    
+    
 
 }
