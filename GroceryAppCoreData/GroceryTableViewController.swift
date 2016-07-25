@@ -32,12 +32,12 @@ class GroceryTableViewController: UITableViewController,NSFetchedResultsControll
     }
 
     @IBAction func addButtonPressed(){
-        let alert = UIAlertController(title: "Add Grocery Category", message: nil, preferredStyle: .Alert)
-        alert.addTextFieldWithConfigurationHandler({ (textField) -> Void in
+        let notification = UIAlertController(title: "Add Grocery Category", message: nil, preferredStyle: .Alert)
+        notification.addTextFieldWithConfigurationHandler({ (textField) -> Void in
         })
         
-        alert.addAction(UIAlertAction(title: "Add Category", style: .Default, handler: { (action) -> Void in
-            let textField = alert.textFields![0] as UITextField
+        notification.addAction(UIAlertAction(title: "Add Category", style: .Default, handler: { (action) -> Void in
+            let textField = notification.textFields![0] as UITextField
             print(textField.text!)
             
             let groceryCategory = NSEntityDescription.insertNewObjectForEntityForName("GroceryCategory", inManagedObjectContext: self.managedContextOfObjects)
@@ -47,7 +47,7 @@ class GroceryTableViewController: UITableViewController,NSFetchedResultsControll
             try! self.managedContextOfObjects.save()
 
         }))
-        self.presentViewController(alert, animated: true, completion: nil)
+        self.presentViewController(notification, animated: true, completion: nil)
 
     }
     
