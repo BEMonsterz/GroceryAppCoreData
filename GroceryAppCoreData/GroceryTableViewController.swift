@@ -11,6 +11,8 @@ import CoreData
 
 class GroceryTableViewController: UITableViewController,NSFetchedResultsControllerDelegate {
     
+    
+
     var managedContextOfObjects :NSManagedObjectContext!
     
     var fetchedResultsController :NSFetchedResultsController!
@@ -137,9 +139,15 @@ class GroceryTableViewController: UITableViewController,NSFetchedResultsControll
         
         let groceryList = self.fetchedResultsController.objectAtIndexPath(indexPath)
         
-        
-        
+       
         cell.textLabel?.text = groceryList.valueForKey("grocerytitle") as? String
+        
+        
+        
+        let groceryItems = groceryList.valueForKey("groceryItems") as? NSSet
+        
+
+        cell.detailTextLabel?.text = "\(groceryItems!.count)"
         print()
         // Configure the cell...
         print()

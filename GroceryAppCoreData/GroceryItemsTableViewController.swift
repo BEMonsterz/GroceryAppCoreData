@@ -134,6 +134,8 @@ class GroceryItemsTableViewController: UITableViewController,NSFetchedResultsCon
         
         
         cell.textLabel?.text = groceryList.valueForKey("groceryItems") as? String
+        
+        
         print()
         // Configure the cell...
         print()
